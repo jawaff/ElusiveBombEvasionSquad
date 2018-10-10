@@ -1,0 +1,353 @@
+	-This code below is how to make a drawing thing.
+	while (game == true)
+	{
+		engine->handle_Input ();
+		if (engine->Quit() == true)
+		{
+			clean_Up ();
+			exit (1);
+		}
+		if (movementState == 0)
+		{
+			apply_Surface (x, y, rawr, screen, NULL);
+			SDL_Flip (screen);
+
+			if (engine->key_Down("d"))
+			{
+				x += 3;
+			}
+			if (engine->key_Down("w"))
+			{
+				y -= 3;
+			}
+			if (engine->key_Down("a"))
+			{
+				x -= 3;
+			}
+			if (engine->key_Down("s"))
+			{
+				y += 3;
+			}
+		}
+
+
+
+		-I found out the the '==' and '=' aren't what I thought they were. But the '==' is used for comparing and the '=' is for assignments.
+
+
+		-the switch case statement does not work for my movements. Go with the if else statement to separate the four groups. Gonna go skate now :D
+
+		-I'm really starting to hate my movements... But I realized that key_Up doesn't mean the same thing as key_Down == false... Skip the movements
+		for now though...s
+
+		-Work on the bombplacement function, I need the else statement after the if (start == true). Make it universal for all the rows depending on the
+		row parameter.
+
+		-I am having a terrible time trying to figure out what I'm doing wrong with my bomb class. The SDL_BlitSurface function is coming up with an 
+		exception because of the applySurface function I used to display the bombs. Even though all of the parameters should be correct. I think
+		that there may be a small chance that the x and y values aren't correct. Actually that's impossible because I saw that the y offset on the exception
+		changed each time I ran the program. Meaning that the random number generator was working properly and that the coordinates shouldn't be the 
+		problem. But everything else should be fine also! D:
+
+		-I have commented out bdim[19].x = NULL; and an if statement connected to that within bombPlacement ();.... Just so you know?
+		
+		-I have run into a multitude of semantic errors... It seems that my system for randomly figuring out all of m[4]'s positions within each row
+		is faulty. I thought that it would work... But I guess not. I have ran into multiple areas that have backed this idea up. The first one being
+		when I first thought that the bombs were working. Only 13 bombs were applied to the surface of the screen and no points (the points weren't ready,
+		but still...) This along with the test project that I just made for specifically printing out all of m[4]'s values turned out to be a failure.
+		For some reason only 1 value was printed within the for loop that had all of the if x is within these values then these are the min and max.
+		 
+		-I have a serious problem with my bomb logic. I don't get it. -.- But I have figured out that the points only 
+		show up sometimes due to the coordinate assigning.
+
+		-I almost feel retarded... Due to the fact that random()'s max parameter isn't included in the possible random
+		numbers. I basically screwed up my code with that. There's also a stupid thing that I've done... I've made the 
+		max smaller than the min in some random() methods... It almost seems like the reason this isn't working is because
+		I am stupid when it comes to the simple things. But I made a genius (imo) way of assigning bomb coordinates to
+		all of the bombs.
+		
+		-Due to the fact that there isn't a big area for the m[] values, I made all of them completely random. It
+		doesn't need to be dependant on the preceeding location. It wouldn't have worked anyway because of the odd
+		rows going in the opposite direction. I never thought about how that would affect the rest of the program until 
+		now. 
+
+		-The bombplacement () has continued to be totally gay and tedious. I have found out that the final run through 
+		the while loop further changes some of the point[].x's and .y's. The m [] effects the according point[]. Once
+		at 4 the point[] will equal -1300 or something close to that.
+
+		-There are some problems with r. It will only stay on 0 for two trips through the for loop in bombPlacement().
+		I see no reason for it to do this... >.> It infuriates me so Imma take a break now. But I think I'm close to
+		figuring this all out. There's so much to this function, it hurts my brain trying to keep track of all of the 
+		numbers.
+
+		-The problem is with r... I am definately sure about that. The even rows aren't being used at all. I think
+		I can fix this and have it running soon. That's if I actually work on it... But I need to figure out a new
+		structure for the logic of the odd and even rows.
+
+		-So far, since I got the bombPlacement() to work! wooooh! I have tried to include the other rowBombPlacement() into the program. There is something
+		internally wrong with it. I'm not sure what it is, but I do know that it is executing all according to plan. Which is nice, because I just pulled
+		some logic out of my ass in a couple minutes to execute it at the proper time.
+
+		-I have now finished a great deal of my game and am now going to retire for the evening. 
+		Things I need to do:
+
+			*1.Make a score system
+			*2.Make a pause menu
+			3.Make my instructions option
+			*4.Make the SDL_Rect for the player slightly smaller for the collision detection. I don't want to include 
+			the arms or jetpack in the detection. So I'm just going to make it easier for the player to get through the bombs
+			and such.
+			5.Other than that, I don't have much to do really. Unless I want to add on to this. 
+
+		------notes for the colRect calculations------------
+		w=76 h=70   colRect.w - 16 && - 13        colRect.h - 17 && - 7
+
+		- Due to faggotry within my code, I won't be continueing to fix the problem at hand. I have made the colRect
+		and for some reason, the collisionDetect() blah blah blah keeps thinking that the bombs are touching the player. 
+		BUT THEY AREN'T1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! So I will be retiring again from this tedious adventure. and also, if i ever happen to read this at a later time, take note that maceo says hi <3
+
+		-I have just gotten to another stopping point with my new collision detection system. T.T I have pretty much made the system right,
+		however, I've noticed that the A.x + ... and etc in the distanceFormula() isn't the right way to make that... That just keeps increasing A.x, A.y, B.x ... etc each time the thing is called
+		. So that isn't good... Fix it!dd
+
+		-This is a year later, coming to finish my senior project. I was about to maka a new collision system
+		but then I realized that the system that was currently implemented was better than what I was going to make.
+		Well they would have turned out about the same probably, but anyway the previous entry is invalid now.
+		I fixed the problem a while ago I guess.
+
+		-Well the collision system isn't properly receiving the correct data to work properly. I think
+		that some of the bombs move from one row into another over the course of the game(This doesn't make
+		sense though seeing how the bombs get reset with each cycle. It may be that the rows themselves 
+		shifting from their intended course and causing a muckus later on during the debugging process.) This is the only
+		reason I could think that they wouldn't be checked for collision based off my systems methods.
+		This requires attention towards my bomb placement algorithm. I think that I either need to reimplement
+		or read it over and make it more stable. Of which I will no tbe partaking in on account of the time
+		and my loathe for debugging spaghetti code that I haven't looked over in a years time(I think I 
+		actually did pretty good for how many programs I had written at the time, but I have more experience
+		now with my code structuring.)(And my bomb placement algo is so freaking abstract DX I cannot tell
+		what is going on in it, so like I said before another day...)
+		
+		-In response to a proposition within the previous post in some paranthesis. I think that changing
+		my screen height from 678 to 768 will solve the problem, because there are some unused bits used in the map
+		because 678 divided by four is 169.5. Seeing how this isn't a whole number and I've been using only whole 
+		numbers for the bombs. I think that it'd be beneficial to switch to 768 which dividing by four results
+		with 192. For me to alter this, I'm going to need to redo a good portion of the bomb placement code as well
+		as the row's dimensions and placements. Basically everything that requires the screen to be a certain
+		size will be a candidate for a code alter.
+
+		-After looking through the bomb placement code, I noticed that 196 has been showing up repeadedly for
+		the bomb.y-ish things. This has to be wrong and since the current row height is 169, it looks like a typo
+		to me. Which may make all this code altering very beneficial(I may not even need to rewrite it.)
+		tha
+		-After fixing some bugs in the bomb placement algo, I may now have a good basis for my game. I will now
+		test collision between the player and bombs
+
+		-I have made a new addition to the collision system, it is a few hash table maps that hold boolean collision
+		variables for each bomb and point. I used this so that we can check for collision only if there isn't a
+		collision already going on. I think that it may either make this game faster or just make it easier to
+		debug(which was the original reason for this addition, I wasn't able to see how everything was working
+		because once I had a collision going and a break in the collision area, the collision would keep getting 
+		calculated over and over until the objects weren't touching. But hopefully once I finish altering the code
+		it will work out.
+		
+		-Next I'm going to make the score system, of which I just started a bit on. Off to skate now and
+		explore a creepy guys house that jacob found dog carcass' in(he also claims they were half eaten away.)
+
+		-The method for blitting the score I want to use a grid-like map of the possible chars.
+
+		-I have the font map completed, all it needs now are clip rects, of which we only need one
+		to use on all the numbers.
+
+		-The score system is now working. Next I want to get a pause screen set up, then a button that allows the
+		player to move along the z-axis semi-freely. So press a button and the player moves inbetween two points on the "z" axis.
+		Since I don't really have control of the z-axis, I'm just going to use sprites to show that he has moved.
+		I want to use a particle engine that would blit particles over the toast(while it looks like it has a shadow
+		over it.) This hopefully will be a big enough indicator that the player is on a different plane.
+
+		-The score system has a bug in it that calculates the wrong number once getting up to ~3000, I will fix it later
+	    though.
+
+		-I'm not sure if the bug exists in my code or not... For the score system I mean... The zero and the eight
+		look so similar that it's difficult to distinguish one from the other while playing.
+	
+		-I basically have the pause screen all set up. Just need to draw it and add a few lines of code 
+		to the load and clean_Up methods.
+		
+		-Things I want to add to this game: 
+		* = started
+		+ = done
+		[*] Multiple character selection /*almost done, just need character .bmps*/
+		[] A sort of three dimensional movement space, two two-dimensional planes on the z-axis
+		[*] Bombs that move around, either randomly or not.
+		[+] Bombs go through cycles of speeds based on how many times the bombs have gone past 
+		[+] Object can only be hit once, then disappear./*splosion rendering needs refined*/
+		[+] Kooler movement system for the player./*Just need to perfect the curve mathematics*/
+		[+] A health system that causes game overs due to damage taken.
+			[+] A varying expression image conveying health left to the player(idea derived from waffle warrior platformer notes.) //Use the player itself to convey health!
+		[] Particle Engine for kool effects like on the pause back. And for the dimension leap.
+
+		//w will be a char type mapped to the ->second
+		//It is to be used once an arrow key is pressed after moving with the according char of 'wasd'
+        w->left		//move 9 on the diagram in the game folder
+		w->right	//2
+		w->down		//Using down I think it'd be kool to have a pullback effect that with time increases
+					//a dash that could go through bombs safely or maybe it could just activate a character's
+					//special ability. 
+		d->left
+		d->right
+		...
+
+		//Now when wasd are just being pressed alone they hold the original 8-movement limitations.upleft downright up down ...
+		//Then with only using the arrow keys I may make another ability related to a quick ranged character dependant power.
+
+		-Now I have a solid ground for the movement system. This has been by far the trickiest thing I've had to implement.
+		Methods to finish include PlayerEngine::beginCalcDirection annd PlayerEngine::endCalcDirection, other than that
+		the movement system is scattered throughout the PlayerEngine and the game method.
+
+		-I have added images for bombs when the splode! But both bombs and points will for now use splosion.bmp
+
+		-I have to leave abruptly but  my showSplosion() only works for bombs atm... I used it for points too..
+		
+		-I have refined the logic for the bomb rendering. So now after a bomb is hit, it disappears(the splosion is only being
+		shown for a very short period of time.) To finish the refining, we need to add the splosion rendering to the bomb/point applying.
+		 
+		-This project has been getting excited, it is all coming together. I've been programming my ass off the past bit of time.
+		I just want  see it finished so I can move on to another project. But with each featureI add, the results have become like a drug to me.
+		Especially when the feature was made in an elegant fashion and has little debug time. Even with all these amazingly efficient algorithms
+		the funniest part is that I've been as high as a kite by then.
+
+		-Every once in a while some points won't disappear and act as if there is no collision occuring.
+		I thought it was just the fact that the jetpack wasn't accounted for. But it's a bug. >.>
+		Only one, but they will grow, I'm amazed at how little of them I have atm. Especially with this program's complexities.
+
+		-I love how fast I am moving through all these new features. Now I have splosion rendering for a duration after a bomb's collision.
+
+		-Before the movement system was incomplete, but no longer! Nvm it's incomplete again... Very difficult to implement, but I'm close.
+		
+		-For the curve movements, I've decided to simplify things a little and use two variables x and y that determine
+		a good path for the curve by incrementing and decrimenting after update.
+		y = - 8 x = 0, y++ x++, y = - 7 x = 1, y++ x++
+		Using this, the player will go the same speed during the curve as it would otherwise. Assuming that the speed is 8...
+
+		-Finally, officially have figured, implemented and tested the curve movements. Although the full logic is only placed on w atm.
+
+		-One final thing I could do for my curves is start xCurve and yCurve a bit into the curve instead of at 0 and yspeed*1.25
+		And the logic for the movement combos needs adjusting, some combos may be too unintuitive.
+		
+		-I have made it possible for multiple sprites for each character. This is fancy, but also conveys hp to the player.
+		All I have to do with it is check for the character's deat then show a semi-transparent screen that says game over!
+		And of course I want a wait for input before closing.
+
+		-The game now is operational from the beginning to the end. It displays game over upon dieing and has a change in speed
+		upon completing a wave.
+		
+		-For the bomb ai that I was looking for, I think I can pull off something simple and still add a sufficient challenge to the game.
+		Or at the very least, one of my bomb types can do this. Which is if the bomb is above the player, it moves in the horizontal direction
+		towards the player at a speed of 3 or 2. This would challenge the players who stay in one part of the map. I also think adding a couple other
+		types would be nice too.
+
+		-The game is really coming together. Once I add the ai and attack moves for the characters in as well as the speed up move, I think this game
+		will be looking pretty kool.
+
+		-I have just added onto my bombPlacement() code. Not the rowBombPlacement() yet... But that ones easy. Although I've gotten the new bomb types
+		to be assigned positions in the rows, I have not set up the logic for them to be applied to the surface and moved. This stuff will be more revolved
+		around how I want the ai to react. But each row either has a simple or meatier bomb, there will be three simples and two meatier bombs. But there are
+		five rects for each bomb type. Utilize rowDecider[5] as it tells which of the types are in each row.
+
+		-I finished rowBombPlacement(), I'm done for now, but also, I may have messed up the paranthesis on both bomb placement methods...
+
+		-Paranthesis' are all fine in this project, now I have a problem regarding undeclared variables.
+
+		-All errors have been dealt with. Now I just need to add logic and rendering to these new bomb types and this part'll be done.
+
+		-FYI The new bomb types need to be checked for collision and then checked to see if collision == true to not apply the surface.
+		Basically, anything we've had to do with the bomb and point we need to do to our new types.
+
+		-I don't like messing with the bombPlacement() algos. >.> I overlooked another thing and am now needing to look at a few chunks of code.
+		The break that gives the information is still up. Look at the bomb SDL_Rects!
+		
+		-There still seems to be problems with bombPlacement() specifically. The other is working fine I think. But bombPlacement() seems
+		to be messing up some of its assignments. If I go through it carefully again, especially paying attention to the b variable.
+		I think I can get it fixed and running again.
+
+		-I have completely wiped my placement algos free from bugs. Now I just have to add in movement logic and apply the surfaces (the collision is working,
+		I always die now even when not getting hit; the simple and meaty bombs are invisible.)
+
+		-All of the bombs and points are showing up in the game, however there appears to be some semantic errors involving the collision checks of the simple/meaty 
+		bombs. I am not fixing it now... But should soon. 
+		
+		-Still haven't solved the problem, but made the splosions compatable with the new bomb types. 
+		Now a good portion of the default bombs are disappearing or not reacting to collision. 
+
+		-Although I've gone through my code and defeated a good number of semantic bugs. There still 
+		is something out there causing defualt bombs disappear. This is my only issue with the game
+		as of now, the new bomb types have been integrated into the system now with zero known bugs.
+		However, the meatierBomb has just been seen drawn over another bomb. 
+
+		-I found the culprit after a surprising bit of debugging information that I found. 
+		Turns out one of the bombs were still using my old bomb[i] system and wasn't changed to bomb[b] yet.
+
+		-I have a stable version of the application saved and ready for presenting.
+		 
+		-Also, I started thinking to myself as I was playing the game about how difficult it really
+		is to utilize the intricate movement system. But then I thought, if I make a bot that can
+		use those movements to play it better than a human can, I will have something nice to 
+		show on my resume. I figure that if I use machine learning to look for situations to use
+		different moves, then I could get a good enough bot. I don't want the bot to be too computationally
+		expensive either. I also have been thinking that if I make the bot basically look for paths around the 
+		'bad' objects and towards the 'good' objects. This will require path finding, adversarial defense, and object recognition.
+
+		-We now have the simpleBomb type up and running. The meatierBomb however, won't be as easy to implement logic for.
+		I think that it should use the intricate movement system.
+
+		-I'm now thinking that if I was to implement enemy bots that would avoid friendly collisions and use the intricate
+		movement system to attack the enemy. I think that I could also reuse that code to make the points the targets
+		instead of the player. But having a bot that is the player impose different variables of the environment. The enemy
+		bombs have to go after a player that can avoid being hit(or in the future hopefully attack.) While the bombs
+
+		-The meaty bombs will have to wait, that IA will be somewhat intense. Besides, I want my player to be able to speed up
+		as well as attack bombs.
+		**************************************************************************************************************
+		-I can still make my meaty bomb pretty simple. When I was going through possible ways to handle the environment
+		while looking at a screen cap of the game. I noticed that if the bomb was to just pick a standard 4-way direction that was
+		void of any other objects. Then after initializing the movement, all that would be needed to be done is know the direction that
+		the player is in. Then we would need to be using some sort of pathfinding algo to check for possible paths, which could
+		in a sense be like finding nodes. Once every node around the player is determined, the nodes in the new
+		frontier could expand into new areas that could possibly lead to the player. I think that A* search
+		would be our best bet for the algo seeing how we have a fully deterministic environment that can be given to the bots with ease.
+		 
+		-But even though we'd have the shortest path given out nodes. There is still a problem with the predicting of the player's moves.
+		We could add in a function that gives the player's current move. But there are still going to be a subjective field around
+		where the player is heading. So we can't really depend on one path to get to the player. We can however keep adapting our path.
+		-Ok we are going to go through with a move(mostly curves), which will take x seconds to do so. While doing that move we don't need to
+		give it anymore though because we have already decided that it is optimal for the given situation. So we then go about deciding the 
+		next optimal move to get closer to the player.
+
+		-When checking for moves to make, go with the move that travels the greatest distance, and for curves, determine
+		how long before the bomb must make another move.
+
+		-Another serious thing that must be remembered is that the bombs need to either be in their row or one that came before it.
+		Otherwise the bomb would disappear and be placed again once the row goes off the screen.
+		***************************************************************************************************************
+		-I think that if I use the bomb::initializeMovement() to determine the absolute direction of each path and
+		then use bomb::determineMovement() to look for better paths as we go farther down the original path made by 
+		bomb::initializeMovement(). So to determine if a path is better or not is right up A* search's alley.
+
+		-I have now completed the movement system.
+
+		-Now it seems as though I'm going to have to make another movement swtich case for actually moving the bombs...
+		Each meaty bomb will probably be the equivalent of 4 regular bombs max. There will be a maximum of 5 meaty bombs
+		going at once. So there will be about a maximum of "40" objects on the screen at once. Of which I started with 20.
+
+		-Another collision detection system is going to need to be made for the testBombs[]. It only needs to know where
+		bombs are that are in its row(s) and where the player is to function. Which is good because the bomb class holds all
+		but the player's row(s) and SDL_Rect.
+
+		-Ai for this program is seeming to be quite a difficult task, I think I need to use a map for the distances of rays
+		using the movements that have been selected. But then there would need to be five different maps for the <int move, int distance>
+		So since I'm dealing with tuples, I need different maps for each meatyBomb[i]. 
+
+		
+
+
+
